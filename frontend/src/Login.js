@@ -14,7 +14,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await axios.post("https://sports-allocation-using-mern-4.onrender.com//api/auth/login", {
         username,
         password,
       });
@@ -30,7 +30,7 @@ function Login() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/register", {
+      const res = await axios.post("https://sports-allocation-using-mern-4.onrender.com//api/auth/register", {
         username,
         password,
       });
