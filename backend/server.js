@@ -5,12 +5,14 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 
+// ✅ Import Routes
 import authRoutes from "./routes/auth.js";
 import bookingRoutes from "./routes/booking.js";
 import eventRoutes from "./routes/events.js";
 
 dotenv.config();
 
+// ✅ Express App Setup
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -26,15 +28,17 @@ app.use("/api/auth", authRoutes);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/events", eventRoutes);
 
-// ✅ Serve Frontend (Production Build)
+// ✅ Path setup (for serving frontend)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(express.static(path.join(__dirname, "../frontend/build")));
+// ✅ Serve Frontend (Production Build)
+const frontendPath = path.resolve(__dirname, "../frontend/build");
+app.use(express.static(frontendPath));
 
-// ✅ FIX for Express v5 (Regex instead of "*")
+// ✅ Catch-all route (works in Express v5)
 app.get(/.*/, (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+  res.sendFile(path.join(frontendPath, "index.html"));
 });
 
 // ✅ Start Server
