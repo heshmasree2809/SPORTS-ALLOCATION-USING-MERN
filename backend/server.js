@@ -15,12 +15,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// ✅ MongoDB Connection
+// ✅ MongoDB connection
 mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
@@ -29,23 +26,14 @@ app.use("/api/auth", authRoutes);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/events", eventRoutes);
 
-// ✅ Serve Frontend (React) in Production
+// ✅ Serve React frontend in production
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// When deployed, serve React build
-if (process.env.NODE_ENV === "production") {
-  const frontendPath = path.join(__dirname, "../frontend/build");
-  app.use(express.static(frontendPath));
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
+});
 
-  // All other routes → serve React app
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(frontendPath, "index.html"));
-  });
-}
-
-// ✅ Start Server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () =>
-  console.log(`🚀 Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
-);
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
