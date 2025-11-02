@@ -22,8 +22,8 @@ function Home() {
   const fetchReports = async () => {
     try {
       const [bookingsRes, eventsRes] = await Promise.all([
-        axios.get("https://sports-allocation-using-mern-4.onrender.com//api/bookings"),
-        axios.get("https://sports-allocation-using-mern-4.onrender.com//api/events"),
+        axios.get("https://sports-allocation-using-mern-4.onrender.com/api/bookings"),
+        axios.get("https://sports-allocation-using-mern-4.onrender.com/api/events"),
       ]);
 
       const totalEvents = eventsRes.data.length;
@@ -62,7 +62,7 @@ function Home() {
     const time = e.target[2].value;
 
     try {
-      await axios.post("https://sports-allocation-using-mern-4.onrender.com//api/bookings", {
+      await axios.post("https://sports-allocation-using-mern-4.onrender.com/api/bookings", {
         sport,
         date,
         time,
@@ -87,7 +87,7 @@ function Home() {
     const phone = e.target[3].value;
 
     try {
-      await axios.post("https://sports-allocation-using-mern-4.onrender.com//api/events/add", {
+      await axios.post("https://sports-allocation-using-mern-4.onrender.com/api/events/add", {
         eventName,
         eventDate: new Date().toISOString(),
         location: "Main Stadium",
