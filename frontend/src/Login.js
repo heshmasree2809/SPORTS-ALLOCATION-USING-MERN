@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
+import API_BASE_URL from "./api"; // ✅ Import the base URL
 
 function Login() {
   const [isLogin, setIsLogin] = useState(true); // true = Login, false = Signup
@@ -14,7 +15,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://sports-allocation-using-mern-4.onrender.com//api/auth/login", {
+      const res = await axios.post(`${API_BASE_URL}/api/auth/login`, {
         username,
         password,
       });
@@ -22,6 +23,7 @@ function Login() {
       localStorage.setItem("loggedUser", res.data.username);
       navigate("/home");
     } catch (err) {
+      console.error(err);
       alert(err.response?.data?.error || "❌ Invalid login credentials");
     }
   };
@@ -30,7 +32,7 @@ function Login() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://sports-allocation-using-mern-4.onrender.com//api/auth/register", {
+      const res = await axios.post(`${API_BASE_URL}/api/auth/register`, {
         username,
         password,
       });
@@ -39,6 +41,7 @@ function Login() {
       setUsername("");
       setPassword("");
     } catch (err) {
+      console.error(err);
       alert(err.response?.data?.error || "❌ Registration failed");
     }
   };
