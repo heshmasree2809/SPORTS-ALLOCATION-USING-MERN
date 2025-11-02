@@ -4,7 +4,7 @@ import "./style.css";
 import API_BASE_URL from "./api"; // ✅ Import base URL
 
 function Home() {
-    const [reports, setReports] = useState({
+  const [reports, setReports] = useState({
     totalEvents: 0,
     totalParticipants: 0,
     slotsBooked: 0,

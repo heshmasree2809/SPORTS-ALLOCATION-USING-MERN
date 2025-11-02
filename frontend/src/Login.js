@@ -15,7 +15,11 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+<<<<<<< HEAD
       const res = await axios.post(`${API_BASE_URL}/api/auth/login`, {
+=======
+      const res = await axios.post("https://sports-allocation-using-mern-4.onrender.com/api/auth/login", {
+>>>>>>> d9a2e99ca60911e85e6f52d63a1b12d42281fcdb
         username,
         password,
       });
@@ -32,7 +36,11 @@ function Login() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
+<<<<<<< HEAD
       const res = await axios.post(`${API_BASE_URL}/api/auth/register`, {
+=======
+      const res = await axios.post("https://sports-allocation-using-mern-4.onrender.com/api/auth/register", {
+>>>>>>> d9a2e99ca60911e85e6f52d63a1b12d42281fcdb
         username,
         password,
       });
