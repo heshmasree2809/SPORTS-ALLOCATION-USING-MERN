@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
-import API_BASE_URL from "./api"; // ✅ Import the base URL
+import API_BASE_URL from "./api";
 
 function Login() {
-  const [isLogin, setIsLogin] = useState(true); // true = Login, false = Signup
+  const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -15,14 +15,13 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-<<<<<<< HEAD
-      const res = await axios.post(`${API_BASE_URL}/api/auth/login`, {
-=======
-      const res = await axios.post("https://sports-allocation-using-mern-4.onrender.com/api/auth/login", {
->>>>>>> d9a2e99ca60911e85e6f52d63a1b12d42281fcdb
-        username,
-        password,
-      });
+      const res = await axios.post(
+        "https://sports-allocation-using-mern-4.onrender.com/api/auth/login",
+        {
+          username,
+          password,
+        }
+      );
       alert(res.data.message || "✅ Login successful!");
       localStorage.setItem("loggedUser", res.data.username);
       navigate("/home");
@@ -36,14 +35,13 @@ function Login() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-<<<<<<< HEAD
-      const res = await axios.post(`${API_BASE_URL}/api/auth/register`, {
-=======
-      const res = await axios.post("https://sports-allocation-using-mern-4.onrender.com/api/auth/register", {
->>>>>>> d9a2e99ca60911e85e6f52d63a1b12d42281fcdb
-        username,
-        password,
-      });
+      const res = await axios.post(
+        "https://sports-allocation-using-mern-4.onrender.com/api/auth/register",
+        {
+          username,
+          password,
+        }
+      );
       alert(res.data.message || "✅ Registration successful!");
       setIsLogin(true);
       setUsername("");
@@ -57,11 +55,7 @@ function Login() {
   return (
     <div className="login-container">
       <h2>{isLogin ? "Login" : "Sign Up"}</h2>
-
-      <form
-        className="login-form"
-        onSubmit={isLogin ? handleLogin : handleSignup}
-      >
+      <form className="login-form" onSubmit={isLogin ? handleLogin : handleSignup}>
         <input
           type="text"
           placeholder="Username (without @gmail.com)"
