@@ -11,11 +11,11 @@ app.use(cors());
 
 // ✅ Your routes should start like this:
 import authRoutes from "./routes/auth.js";
-import bookingRoutes from "./routes/bookings.js";
+import bookingRoutes from "./routes/booking.js";
 import eventRoutes from "./routes/events.js";
 
 app.use("/api/auth", authRoutes);
-app.use("/api/bookings", bookingRoutes);
+app.use("/api/booking", bookingRoutes);
 app.use("/api/events", eventRoutes);
 
 // ✅ PORT setup for Render
