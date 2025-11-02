@@ -16,24 +16,27 @@ app.use(express.json());
 app.use(cors());
 
 // ✅ MongoDB Connection
-mongoose.connect(process.env.MONGO_URI)
+mongoose
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ Connected to MongoDB"))
-  .catch(err => console.error("❌ MongoDB Connection Error:", err));
+  .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
 // ✅ API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/events", eventRoutes);
 
-// ✅ Serve frontend when deployed
+// ✅ Serve Frontend (Production Build)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+// ✅ FIX for Express v5 (Regex instead of "*")
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
 });
 
+// ✅ Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
